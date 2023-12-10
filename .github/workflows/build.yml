@@ -18,7 +18,7 @@ jobs:
 
       - name: Setup kernel source
         run: |
-          repo init --repo-rev=v2.16 --depth=1 -u https://android.googlesource.com/kernel/manifest -b common-android13-5.15-lts
+          repo init --repo-rev=v2.16 --depth=1 -u https://android.googlesource.com/kernel/manifest -b common-android13-5.15-2022-11
           repo sync -c --no-tags
 
       - name: Setup KernelSU
