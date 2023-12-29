@@ -31,7 +31,11 @@ jobs:
         run: |
           wget -O common/build.config.gki https://raw.githubusercontent.com/bugme2/kernel-gki-build/main/build.config.gki
           sed -i 's/ -dirty//g' common/scripts/setlocalversion
-          sed -i '/temp/s/DEVICE_ATTR_RO/DEVICE_ATTR_RW/' common/drivers/thermal/thermal_sysfs.c
+          sed -i 's/thermal_zone_get_temp(tz, &temperature)/350/' common/drivers/thermal/thermal_sysfs.c
+          sed -i 's/thermal_zone_get_temp(tz, &temp)/350/' common/drivers/thermal/thermal_core.c
+          sed -i 's/thermal_zone_get_temp(tz, &temperature)/350/' common/drivers/thermal/thermal_hwmon.c
+          sed -i 's/thermal_zone_get_temp(tz, &temp)/350/' common/drivers/thermal/thermal_netlink.c
+          sed -i 's/thermal_zone_get_temp(pcb_tz, &pcb_temp)/350/' common/drivers/thermal/ti-soc-thermal/ti-thermal-common.c
           sed -i '/THERMAL_DEVICE_ENABLED/s/1/0/' common/android/abi_gki_aarch64.xml
           sed -i '/THERMAL_DEVICE_DISABLED/s/0/1/' common/android/abi_gki_aarch64.xml
           LTO=thin BUILD_CONFIG=common/build.config.gki.aarch64 build/build.sh
