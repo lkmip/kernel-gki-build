@@ -33,6 +33,8 @@ jobs:
           sed -i 's/ -dirty//g' common/scripts/setlocalversion
           sed -i '/THERMAL_DEVICE_ENABLED/s/1/0/' common/android/abi_gki_aarch64.xml
           sed -i '/THERMAL_DEVICE_DISABLED/s/0/1/' common/android/abi_gki_aarch64.xml
+          sed -i 's/data->sensor_data, trip, temp/data->sensor_data, trip, 115000/' common/drivers/thermal/thermal_of.c
+          sed -i 's/temperature = temp/temperature = 115000/' common/drivers/thermal/thermal_of.c
           LTO=thin BUILD_CONFIG=common/build.config.gki.aarch64 build/build.sh
           echo "BUILD_TIME=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_ENV
 
